@@ -8,9 +8,11 @@ actblock=5867187
 blcok02=actblock-100 
 
 #sprawdzenie czy sa dockery
+echo Lista dockerow
 docker ps -a ;
 
-#zatrzymanie i wykasowanie dockera
+#Zatrzymanie i skasowanie dokera Nillion
+echo Zatrzymanie i skasowanie dokera Nillion
 docker stop nillion ;
 docker rm -f nillion ;
 
@@ -18,6 +20,7 @@ docker rm -f nillion ;
 sleep 10 ;
 
 #czy sa pliki  do wykasowania
+echo Lista plikow w katalogu accuser
 ls /root/nillion/accuser ;
 
 #kasowanie 3 plikow accuser.db accuser.db-shm accuser.db-wal w katalogu nillion/accuser
@@ -26,6 +29,7 @@ rm /root/nillion/accuser/accuser.db-shm ;
 rm /root/nillion/accuser/accuser.db-wal ;
 
 #czy wykasowalo pliki
+echo Lista plikow w katalogu accuser po wykasowaniu
 ls /root/nillion/accuser ;
 
 #wstrzymanie zeby sprawdzic czy nie bylo bledu
@@ -43,9 +47,8 @@ docker run -d --name nillion -v $HOME/nillion/accuser:/var/tmp nillion/retailtok
 #idealnie by bylo jakby wklejal zmienna payforblock do powyzszej komendy
 #--block-start $payforblock
 
-#wstrzymanie zeby przeszedl przz blok na ktorym byl Node zarejestrowany
-sleep 180 ;
-
+#i tutaj musze zrobic cos zeby w trakcie dzialania komendy sprawdzil czy juz blok na ktorym byl Node zarejestrowany 
+#poczekal np 15 sek i przeszedl do nastepnej komendy
 #idealnie by bylo jakby sprawdzal i jesli pojawi sie blok - zmienna payforblock - to po 30 sek przechodzil do kolejnej komendy
 
 #zatrzymanie i kasowanie dockera i ponowne uruchomienie z aktualnym blokiem -100
